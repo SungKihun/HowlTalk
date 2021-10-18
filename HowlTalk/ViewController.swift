@@ -6,12 +6,21 @@
 //
 
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
 
+    var box = UIImageView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        self.view.addSubview(box)
+        box.snp.makeConstraints { make in
+            make.center.equalTo(self.view)
+        }
+        box.image = #imageLiteral(resourceName: "loading_icon")
+        
     }
 
 
