@@ -26,7 +26,7 @@
         <!--Login View Controller-->
         <scene sceneID="rB5-7M-JfJ">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="DSw-aa-aEY" customClass="LoginViewController" customModule="HowlTalk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" modalPresentationStyle="fullScreen" id="DSw-aa-aEY" customClass="LoginViewController" customModule="HowlTalk" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="w2J-YR-pJR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -114,6 +114,10 @@
                             <constraint firstItem="5V3-nf-wNc" firstAttribute="leading" secondItem="yhu-aq-syP" secondAttribute="leading" constant="20" id="x2x-2L-WIR"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="loginButton" destination="5V3-nf-wNc" id="vli-Gm-WOS"/>
+                        <outlet property="signIn" destination="Gm5-tS-RdW" id="8jZ-2m-Hfp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Het-AB-WE3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

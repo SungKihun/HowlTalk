@@ -6,13 +6,31 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var signIn: UIButton!
+    
+    let remoteConfig = RemoteConfig.remoteConfig()
+    var color: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let statusBar = UIView()
+        self.view.addSubview(statusBar)
+        statusBar.snp.makeConstraints { make in
+            make.right.top.left.equalTo(self.view)
+            make.height.equalTo(20)
+        }
+        
+        color = remoteConfig["splash_background"].stringValue
+        
+        statusBar.backgroundColor = UIColor(hex: color)
+        loginButton.backgroundColor = UIColor(hex: color)
+        signIn.backgroundColor = UIColor(hex: color)
     }
     
 
