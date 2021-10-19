@@ -16,6 +16,7 @@
 		7B350EC5271DA02900CCF7CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B350EC3271DA02900CCF7CF /* LaunchScreen.storyboard */; };
 		7B350ECD271DABD200CCF7CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7B350ECC271DABD200CCF7CF /* GoogleService-Info.plist */; };
 		7B350ECF271DBE2C00CCF7CF /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7B350ECE271DBE2C00CCF7CF /* RemoteConfigDefaults.plist */; };
+		7B350ED1271EC92300CCF7CF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B350ED0271EC92300CCF7CF /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		7B350EC6271DA02900CCF7CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B350ECC271DABD200CCF7CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7B350ECE271DBE2C00CCF7CF /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
+		7B350ED0271EC92300CCF7CF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A743BE3BF8612D446C291F8C /* Pods_HowlTalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HowlTalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -93,6 +95,7 @@
 				7B350EC3271DA02900CCF7CF /* LaunchScreen.storyboard */,
 				7B350EC6271DA02900CCF7CF /* Info.plist */,
 				7B350ECE271DBE2C00CCF7CF /* RemoteConfigDefaults.plist */,
+				7B350ED0271EC92300CCF7CF /* LoginViewController.swift */,
 			);
 			path = HowlTalk;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B350ED1271EC92300CCF7CF /* LoginViewController.swift in Sources */,
 				7B350EBD271DA02700CCF7CF /* ViewController.swift in Sources */,
 				7B350EB9271DA02700CCF7CF /* AppDelegate.swift in Sources */,
 				7B350EBB271DA02700CCF7CF /* SceneDelegate.swift in Sources */,

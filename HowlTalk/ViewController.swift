@@ -49,6 +49,7 @@ class ViewController: UIViewController {
         let caps = remoteConfig["splash_message_caps"].boolValue
         let message = remoteConfig["splash_message"].stringValue
         
+        // caps 가 true 이면 앱이 꺼지도록
         if caps {
             let alert = UIAlertController(title: "공지사항", message: message, preferredStyle: .alert)
             let ok = UIAlertAction(title: "확인", style: .default) { action in
@@ -58,6 +59,10 @@ class ViewController: UIViewController {
             alert.addAction(ok)
             
             self.present(alert, animated: true)
+        } else { // caps 가 false 이면 다음 화면이 실행
+            let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            
+            self.present(loginVC, animated: false)
         }
         
         self.view.backgroundColor = UIColor(hex: color!)
