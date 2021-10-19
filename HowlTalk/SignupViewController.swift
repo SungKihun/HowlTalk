@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  SignupViewController.swift
 //  HowlTalk
 //
 //  Created by 성기훈 on 2021/10/19.
@@ -8,10 +8,14 @@
 import UIKit
 import Firebase
 
-class LoginViewController: UIViewController {
+class SignupViewController: UIViewController {
 
-    @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var signUp: UIButton!
+    @IBOutlet var email: UITextField!
+    @IBOutlet var name: UITextField!
+    @IBOutlet var password: UITextField!
+    
+    @IBOutlet var signUp: UIButton!
+    @IBOutlet var cancel: UIButton!
     
     let remoteConfig = RemoteConfig.remoteConfig()
     var color: String!
@@ -29,17 +33,10 @@ class LoginViewController: UIViewController {
         color = remoteConfig["splash_background"].stringValue
         
         statusBar.backgroundColor = UIColor(hex: color)
-        loginButton.backgroundColor = UIColor(hex: color)
         signUp.backgroundColor = UIColor(hex: color)
-        
-        signUp.addTarget(self, action: #selector(presentSignUp), for: .touchUpInside)
+        cancel.backgroundColor = UIColor(hex: color)
     }
-
-    @objc func presentSignUp() {
-        let view = self.storyboard?.instantiateViewController(withIdentifier: "SignupViewController") as! SignupViewController
-        
-        self.present(view, animated: true)
-    }
+    
 
     /*
     // MARK: - Navigation
