@@ -232,6 +232,7 @@
                     <connections>
                         <outlet property="cancel" destination="lyv-Su-Tl7" id="Csh-Sx-rWP"/>
                         <outlet property="email" destination="UzG-V3-8BU" id="cqC-45-NHc"/>
+                        <outlet property="imageView" destination="3XV-XM-6xT" id="BUZ-IS-E7X"/>
                         <outlet property="name" destination="Xm6-8u-7ll" id="Aob-bv-h1s"/>
                         <outlet property="password" destination="Nra-nT-uvS" id="RHI-9K-tS7"/>
                         <outlet property="signUp" destination="Hbo-da-iJb" id="qhi-pQ-Npb"/>

@@ -8,8 +8,9 @@
 import UIKit
 import Firebase
 
-class SignupViewController: UIViewController {
+class SignupViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
+    @IBOutlet var imageView: UIImageView!
     @IBOutlet var email: UITextField!
     @IBOutlet var name: UITextField!
     @IBOutlet var password: UITextField!
@@ -33,11 +34,32 @@ class SignupViewController: UIViewController {
         color = remoteConfig["splash_background"].stringValue
         
         statusBar.backgroundColor = UIColor(hex: color)
+        
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imagePicker)))
+        
         signUp.backgroundColor = UIColor(hex: color)
         cancel.backgroundColor = UIColor(hex: color)
         
         signUp.addTarget(self, action: #selector(signupEvent), for: .touchUpInside)
         cancel.addTarget(self, action: #selector(cancelEvent), for: .touchUpInside)
+    }
+    
+    @objc func imagePicker() {
+        let imagePicker = UIImagePickerController()
+        
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        // photoLibrary: deprecated 경고. PHPicker 사용
+        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+        
+        self.present(imagePicker, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        imageView.image = info[.originalImage] as? UIImage
+        
+        dismiss(animated: true)
     }
     
     @objc func signupEvent() {
