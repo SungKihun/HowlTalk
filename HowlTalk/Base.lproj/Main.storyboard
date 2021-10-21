@@ -115,13 +115,30 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="email" destination="pMH-hx-u1F" id="jKj-t3-5CX"/>
                         <outlet property="loginButton" destination="5V3-nf-wNc" id="vli-Gm-WOS"/>
+                        <outlet property="password" destination="GYe-pf-OSX" id="f03-nw-sXe"/>
                         <outlet property="signUp" destination="Gm5-tS-RdW" id="8jZ-2m-Hfp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Het-AB-WE3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="878" y="61"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="QK5-DO-8ZY">
+            <objects>
+                <viewController storyboardIdentifier="MainViewController" modalPresentationStyle="fullScreen" id="oT9-DC-ltu" customClass="MainViewController" customModule="HowlTalk" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0GQ-SX-Jyg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="V3c-LP-kmJ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BgS-PO-EjO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1717" y="60"/>
         </scene>
         <!--Signup View Controller-->
         <scene sceneID="6QC-0J-YI0">
