@@ -62,6 +62,7 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
         dismiss(animated: true)
     }
     
+    
     @objc func signupEvent() {
         print(#function)
         Auth.auth().createUser(withEmail: email.text!, password: password.text!) { AuthDataResult, error in

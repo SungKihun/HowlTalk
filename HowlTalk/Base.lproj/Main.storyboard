@@ -128,7 +128,7 @@
         <!--People-->
         <scene sceneID="QK5-DO-8ZY">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" modalPresentationStyle="fullScreen" id="oT9-DC-ltu" customClass="MainViewController" customModule="HowlTalk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PeopleViewController" modalPresentationStyle="fullScreen" id="oT9-DC-ltu" customClass="PeopleViewController" customModule="HowlTalk" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0GQ-SX-Jyg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
