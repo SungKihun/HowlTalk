@@ -67,7 +67,17 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
         Auth.auth().createUser(withEmail: email.text!, password: password.text!) { AuthDataResult, error in
             let uid = AuthDataResult?.user.uid
             
-            Database.database().reference().child("users").child(uid!).setValue(["name": self.name.text!])
+            let image = self.imageView.image!.jpegData(compressionQuality: 0.1)
+            
+            let storageRef = Storage.storage().reference().child("userImages").child(uid!)
+            let databaseRef = Database.database().reference().child("users").child(uid!)
+            
+            storageRef.putData(image!, metadata: nil) { (StorageMetadata, Error) in
+                storageRef.downloadURL { URL, Error in
+                    guard let downloadURL = URL else { return }
+                    databaseRef.setValue(["userName": self.name.text!, "profileImageUrl": downloadURL.absoluteString])
+                }
+            }
         }
     }
     
