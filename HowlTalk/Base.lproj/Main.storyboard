@@ -60,7 +60,7 @@
                                     <constraint firstAttribute="height" constant="40" id="apk-vX-Z44"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
                                         <color key="value" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -153,7 +153,7 @@
                                     <constraint firstAttribute="height" constant="40" id="nk7-H3-Ryd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
                                         <color key="value" systemColor="systemRedColor"/>
@@ -245,10 +245,10 @@
     </scenes>
     <designables>
         <designable name="GYe-pf-OSX">
-            <size key="intrinsicContentSize" width="98.666666666666671" height="31"/>
+            <size key="intrinsicContentSize" width="98.666666666666671" height="29"/>
         </designable>
         <designable name="Nra-nT-uvS">
-            <size key="intrinsicContentSize" width="76.666666666666671" height="23.666666666666668"/>
+            <size key="intrinsicContentSize" width="76.666666666666671" height="22"/>
         </designable>
         <designable name="UzG-V3-8BU">
             <size key="intrinsicContentSize" width="48.666666666666664" height="23.666666666666668"/>
