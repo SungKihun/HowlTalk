@@ -10,6 +10,7 @@ import Firebase
 
 class ChatViewController: UIViewController {
     
+    @IBOutlet var tableview: UITableView!
     @IBOutlet var textfield_message: UITextField!
     @IBOutlet var sendButton: UIButton!
     
@@ -36,13 +37,17 @@ class ChatViewController: UIViewController {
         ]
         
         if chatRoomUid == nil {
-            Database.database().reference().child("chatrooms").childByAutoId().setValue(createRoomInfo)
+            self.sendButton.isEnabled = false
+            // 방 생성 코드
+            Database.database().reference().child("chatrooms").childByAutoId().setValue(createRoomInfo) { error, DatabaseReference in
+                if error == nil {
+                    self.checkChatRoom()
+                }
+            }
         } else {
             let value = [
-                "comments": [
-                    "uid": uid!,
-                    "message": textfield_message.text!
-                ]
+                "uid": uid!,
+                "message": textfield_message.text!
             ]
             
             Database.database().reference().child("chatrooms").child(chatRoomUid!).child("comments").childByAutoId().setValue(value)
@@ -51,8 +56,18 @@ class ChatViewController: UIViewController {
     
     func checkChatRoom() {
         Database.database().reference().child("chatrooms").queryOrdered(byChild: "users/" + uid!).queryEqual(toValue: true).observeSingleEvent(of: DataEventType.value) { DataSnapshot in
+            
             for item in DataSnapshot.children.allObjects as! [DataSnapshot] {
-                self.chatRoomUid = item.key
+                
+                if let chatRoomDic = item.value as? [String: AnyObject] {
+                    
+                    let chatModel = ChatModel(JSON: chatRoomDic)
+                    
+                    if chatModel?.users[self.destinationUid!] == true {
+                        self.chatRoomUid = item.key
+                        self.sendButton.isEnabled = true
+                    }
+                }
             }
         }
     }

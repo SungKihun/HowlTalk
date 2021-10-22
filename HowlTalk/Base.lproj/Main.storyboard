@@ -150,10 +150,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Evw-rK-dgP">
-                                <rect key="frame" x="327" y="685" width="67" height="31"/>
+                                <rect key="frame" x="345.66666666666669" y="685" width="48.333333333333314" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="0lO-q3-gUr"/>
-                                    <constraint firstAttribute="width" constant="67" id="4nb-0R-Ooq"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="전송"/>
@@ -167,18 +166,42 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Cwk-73-TIo">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="674"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageCell" rowHeight="70" id="dht-EY-wWc">
+                                        <rect key="frame" x="0.0" y="44.666666030883789" width="414" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dht-EY-wWc" id="Ymo-xa-ecB">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="T2X-Mr-lEz" id="HZN-Jo-2MO"/>
+                                    <outlet property="delegate" destination="T2X-Mr-lEz" id="Al1-PL-dFO"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8Fd-gC-X9C"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Cwk-73-TIo" firstAttribute="leading" secondItem="8Fd-gC-X9C" secondAttribute="leading" id="C1E-p3-Bxa"/>
                             <constraint firstItem="HRA-ml-J6q" firstAttribute="leading" secondItem="8Fd-gC-X9C" secondAttribute="leading" constant="20" id="XR8-ev-Svb"/>
+                            <constraint firstItem="Cwk-73-TIo" firstAttribute="trailing" secondItem="8Fd-gC-X9C" secondAttribute="trailing" id="ad0-KV-4nl"/>
                             <constraint firstItem="8Fd-gC-X9C" firstAttribute="trailing" secondItem="Evw-rK-dgP" secondAttribute="trailing" constant="20" id="feS-we-kOC"/>
                             <constraint firstItem="8Fd-gC-X9C" firstAttribute="bottom" secondItem="Evw-rK-dgP" secondAttribute="bottom" constant="20" id="kTZ-h9-ECr"/>
+                            <constraint firstItem="HRA-ml-J6q" firstAttribute="top" secondItem="Cwk-73-TIo" secondAttribute="bottom" constant="8" symbolic="YES" id="lJP-KD-zsB"/>
+                            <constraint firstItem="Evw-rK-dgP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HRA-ml-J6q" secondAttribute="trailing" constant="8" symbolic="YES" id="oZp-97-46p"/>
                             <constraint firstItem="8Fd-gC-X9C" firstAttribute="bottom" secondItem="HRA-ml-J6q" secondAttribute="bottom" constant="20" id="p3M-A3-IVL"/>
+                            <constraint firstItem="Cwk-73-TIo" firstAttribute="top" secondItem="8Fd-gC-X9C" secondAttribute="top" id="y8y-Uz-pry"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="sendButton" destination="Evw-rK-dgP" id="GLW-re-sdx"/>
+                        <outlet property="tableview" destination="Cwk-73-TIo" id="1xh-Xm-Lsg"/>
                         <outlet property="textfield_message" destination="HRA-ml-J6q" id="347-9S-qQO"/>
                     </connections>
                 </viewController>
