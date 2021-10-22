@@ -7,8 +7,9 @@
 
 import UIKit
 import Firebase
+import ObjectMapper
 
-class ChatViewController: UIViewController {
+class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var tableview: UITableView!
     @IBOutlet var textfield_message: UITextField!
@@ -17,8 +18,28 @@ class ChatViewController: UIViewController {
     var uid: String?
     var chatRoomUid: String?
     
+    var comments: [ChatModel.Comment] = []
+    
     public var destinationUid: String? // 나중에 내가 채팅할 대상의 uid
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return comments.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
+        
+        if #available(iOS 14.0, *) {
+            var content = cell.defaultContentConfiguration()
+            content.text = self.comments[indexPath.row].message
+            cell.contentConfiguration = content
+        } else {
+            cell.textLabel?.text = self.comments[indexPath.row].message
+        }
+        
+        return cell
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -66,9 +87,23 @@ class ChatViewController: UIViewController {
                     if chatModel?.users[self.destinationUid!] == true {
                         self.chatRoomUid = item.key
                         self.sendButton.isEnabled = true
+                        
+                        self.getMessageList()
                     }
                 }
             }
+        }
+    }
+    
+    func getMessageList() {
+        Database.database().reference().child("chatrooms").child(self.chatRoomUid!).child("comments").observe(DataEventType.value) { datasnapshot in
+            self.comments.removeAll()
+            
+            for item in datasnapshot.children.allObjects as! [DataSnapshot] {
+                let comment = ChatModel.Comment(JSON: item.value as! [String: AnyObject])
+                self.comments.append(comment!)
+            }
+            self.tableview.reloadData()
         }
     }
     

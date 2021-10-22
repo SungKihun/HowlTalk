@@ -13,13 +13,11 @@ class ChatModel: Mappable {
     public var users = [String: Bool]() // 채팅방에 참여한 사람들
     public var comments = [String: Comment]() // 채팅방의 대화내용
     
-    public class Comment {
+    public class Comment: Mappable {
         public var uid: String?
         public var message: String?
         
-        public required init?(map: Map) {
-            
-        }
+        public required init?(map: Map) {}
         
         public func mapping(map: Map) {
             uid <- map["uid"]
@@ -27,9 +25,7 @@ class ChatModel: Mappable {
         }
     }
     
-    required init?(map: Map) {
-        
-    }
+    required init?(map: Map) {}
     
     func mapping(map: Map) {
         users <- map["users"]
