@@ -19,6 +19,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     var chatRoomUid: String?
     
     var comments: [ChatModel.Comment] = []
+    var userModel: UserModel?
     
     public var destinationUid: String? // 나중에 내가 채팅할 대상의 uid
     
@@ -27,17 +28,37 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
         
-        if #available(iOS 14.0, *) {
-            var content = cell.defaultContentConfiguration()
-            content.text = self.comments[indexPath.row].message
-            cell.contentConfiguration = content
+        if self.comments[indexPath.row].uid == uid {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MyMessageCell", for: indexPath) as! MyMessageCell
+            
+            cell.label_message.text = self.comments[indexPath.row].message
+            cell.label_message.numberOfLines = 0
+            
+            return cell
         } else {
-            cell.textLabel?.text = self.comments[indexPath.row].message
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DestinationMessageCell", for: indexPath) as! DestinationMessageCell
+            
+            cell.label_name.text = userModel?.userName
+            cell.label_message.text = self.comments[indexPath.row].message
+            cell.label_message.numberOfLines = 0
+            
+            let url = URL(string: (self.userModel?.profileImageUrl)!)
+            
+            URLSession.shared.dataTask(with: url!) { data, response, err in
+                DispatchQueue.main.async {
+                    cell.imageview_profile.image = UIImage(data: data!)
+                    cell.imageview_profile.layer.cornerRadius = cell.imageview_profile.frame.width/2
+                    cell.imageview_profile.clipsToBounds = true
+                }
+            }.resume()
+            
+            return cell
         }
-        
-        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 
     override func viewDidLoad() {
@@ -88,10 +109,18 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                         self.chatRoomUid = item.key
                         self.sendButton.isEnabled = true
                         
-                        self.getMessageList()
+                        self.getDestinationInfo()
                     }
                 }
             }
+        }
+    }
+    
+    func getDestinationInfo() {
+        Database.database().reference().child("users").child(self.destinationUid!).observeSingleEvent(of: DataEventType.value) { datasnapshot in
+            self.userModel = UserModel()
+            self.userModel?.setValuesForKeys(datasnapshot.value as! [String: Any])
+            self.getMessageList()
         }
     }
     
@@ -117,4 +146,16 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     */
 
+}
+
+class MyMessageCell: UITableViewCell {
+    
+    @IBOutlet var label_message: UILabel!
+}
+
+class DestinationMessageCell: UITableViewCell {
+    
+    @IBOutlet var label_message: UILabel!
+    @IBOutlet var imageview_profile: UIImageView!
+    @IBOutlet var label_name: UILabel!
 }
