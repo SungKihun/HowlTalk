@@ -11,6 +11,7 @@ import ObjectMapper
 
 class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet var bottomContraint: NSLayoutConstraint!
     @IBOutlet var tableview: UITableView!
     @IBOutlet var textfield_message: UITextField!
     @IBOutlet var sendButton: UIButton!
@@ -23,6 +24,57 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     public var destinationUid: String? // 나중에 내가 채팅할 대상의 uid
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        uid = Auth.auth().currentUser?.uid
+        sendButton.addTarget(self, action: #selector(createRoom), for: .touchUpInside)
+        
+        checkChatRoom()
+        
+        self.tabBarController?.tabBar.isHidden = true
+     
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    // 시작
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    // 종료
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+        
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            self.bottomContraint.constant = keyboardSize.height
+        }
+        
+        UIView.animate(withDuration: 0) {
+            self.view.layoutIfNeeded()
+        } completion: { complete in
+            if self.comments.count > 0 {
+                self.tableview.scrollToRow(at: IndexPath(item: self.comments.count
+                                                         - 1, section: 0), at: UITableView.ScrollPosition.bottom, animated: true)
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        self.bottomContraint.constant = 20
+        self.view.layoutIfNeeded()
+    }
+    
+    @objc func dismissKeyboard() {
+        self.view.endEditing(true)
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return comments.count
     }
@@ -60,15 +112,6 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        uid = Auth.auth().currentUser?.uid
-        sendButton.addTarget(self, action: #selector(createRoom), for: .touchUpInside)
-        
-        checkChatRoom()
-    }
     
     @objc func createRoom() {
         let createRoomInfo = [
@@ -92,7 +135,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 "message": textfield_message.text!
             ]
             
-            Database.database().reference().child("chatrooms").child(chatRoomUid!).child("comments").childByAutoId().setValue(value)
+            Database.database().reference().child("chatrooms").child(chatRoomUid!).child("comments").childByAutoId().setValue(value) { error, databaseReference in
+                self.textfield_message.text = ""
+            }
         }
     }
     
@@ -133,6 +178,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.comments.append(comment!)
             }
             self.tableview.reloadData()
+            
+            if self.comments.count > 0 {
+                self.tableview.scrollToRow(at: IndexPath(item: self.comments.count
+                                                         - 1, section: 0), at: UITableView.ScrollPosition.bottom, animated: true)
+            }
         }
     }
     
