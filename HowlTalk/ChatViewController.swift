@@ -87,6 +87,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.label_message.text = self.comments[indexPath.row].message
             cell.label_message.numberOfLines = 0
             
+            if let time = self.comments[indexPath.row].timestamp {
+                cell.label_timestamp.text = time.toDayTime
+            }
+            
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DestinationMessageCell", for: indexPath) as! DestinationMessageCell
@@ -105,6 +109,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
             }.resume()
             
+            if let time = self.comments[indexPath.row].timestamp {
+                cell.label_timestamp.text = time.toDayTime
+            }
+
             return cell
         }
     }
@@ -132,8 +140,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             let value = [
                 "uid": uid!,
-                "message": textfield_message.text!
-            ]
+                "message": textfield_message.text!,
+                "timestamp": ServerValue.timestamp()
+            ] as [String : Any]
             
             Database.database().reference().child("chatrooms").child(chatRoomUid!).child("comments").childByAutoId().setValue(value) { error, databaseReference in
                 self.textfield_message.text = ""
@@ -202,9 +211,21 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 }
 
+extension Int {
+    var toDayTime: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "yyyy.MM.dd HH:mm"
+        
+        let date = Date(timeIntervalSince1970: Double(self) / 1000)
+        
+        return dateFormatter.string(from: date)
+    }
+}
 class MyMessageCell: UITableViewCell {
     
     @IBOutlet var label_message: UILabel!
+    @IBOutlet var label_timestamp: UILabel!
 }
 
 class DestinationMessageCell: UITableViewCell {
@@ -212,4 +233,5 @@ class DestinationMessageCell: UITableViewCell {
     @IBOutlet var label_message: UILabel!
     @IBOutlet var imageview_profile: UIImageView!
     @IBOutlet var label_name: UILabel!
+    @IBOutlet var label_timestamp: UILabel!
 }

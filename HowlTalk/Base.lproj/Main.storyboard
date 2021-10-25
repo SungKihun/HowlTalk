@@ -207,6 +207,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="label_message" destination="8fX-vK-QuI" id="07A-w9-NyG"/>
+                                            <outlet property="label_timestamp" destination="t6Z-iV-b9t" id="4Sb-4J-sM8"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DestinationMessageCell" id="Qtb-lt-PkE" customClass="DestinationMessageCell" customModule="HowlTalk" customModuleProvider="target">
@@ -265,6 +266,7 @@
                                             <outlet property="imageview_profile" destination="tDd-8t-v2L" id="HHI-ht-ydx"/>
                                             <outlet property="label_message" destination="bPv-J3-dog" id="hgB-0b-ln2"/>
                                             <outlet property="label_name" destination="iwM-cB-2Dj" id="brf-lJ-phP"/>
+                                            <outlet property="label_timestamp" destination="7fZ-qL-h8o" id="d3v-CA-zAO"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
