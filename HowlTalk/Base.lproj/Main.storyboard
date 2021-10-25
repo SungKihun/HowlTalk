@@ -434,9 +434,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jW3-b6-KjB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2623" y="870"/>
+            <point key="canvasLocation" x="3528.985507246377" y="869.83695652173924"/>
         </scene>
-        <!--Chat-->
+        <!--Chat Rooms View Controller-->
         <scene sceneID="MtJ-Fp-feR">
             <objects>
                 <viewController id="VP7-ky-PBY" customClass="ChatRoomsViewController" customModule="HowlTalk" customModuleProvider="target" sceneMemberID="viewController">
@@ -445,10 +445,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="EBH-cD-UU9">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="643"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RowCell" rowHeight="70" id="aFd-ur-gjU">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RowCell" rowHeight="70" id="aFd-ur-gjU" customClass="CustomCell" customModule="HowlTalk" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="414" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aFd-ur-gjU" id="hMQ-kE-30F">
@@ -463,20 +463,43 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a25-Cy-b7s">
-                                                    <rect key="frame" x="78" y="11" width="42" height="21"/>
+                                                    <rect key="frame" x="78" y="11" width="42" height="26"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PR9-WR-dNl">
+                                                    <rect key="frame" x="78" y="47" width="26.333333333333329" height="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2011.11.11 11:11" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egq-Mw-ZiN">
+                                                    <rect key="frame" x="328.66666666666669" y="11" width="65.333333333333314" height="11"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                                    <color key="textColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="egq-Mw-ZiN" firstAttribute="top" secondItem="hMQ-kE-30F" secondAttribute="topMargin" id="B4y-z8-5qZ"/>
+                                                <constraint firstItem="PR9-WR-dNl" firstAttribute="bottom" secondItem="hMQ-kE-30F" secondAttribute="bottomMargin" id="KSH-pL-e6V"/>
                                                 <constraint firstItem="0pC-RD-tU1" firstAttribute="centerY" secondItem="hMQ-kE-30F" secondAttribute="centerY" id="LoD-sX-1be"/>
+                                                <constraint firstItem="egq-Mw-ZiN" firstAttribute="trailing" secondItem="hMQ-kE-30F" secondAttribute="trailingMargin" id="Oe0-wd-LKG"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="a25-Cy-b7s" secondAttribute="trailing" constant="20" symbolic="YES" id="R6z-gc-nqE"/>
+                                                <constraint firstItem="PR9-WR-dNl" firstAttribute="leading" secondItem="0pC-RD-tU1" secondAttribute="trailing" constant="8" symbolic="YES" id="eg6-Pk-v3V"/>
                                                 <constraint firstItem="a25-Cy-b7s" firstAttribute="top" secondItem="hMQ-kE-30F" secondAttribute="topMargin" id="iJA-9o-7ez"/>
                                                 <constraint firstItem="a25-Cy-b7s" firstAttribute="leading" secondItem="0pC-RD-tU1" secondAttribute="trailing" constant="8" symbolic="YES" id="iMk-C1-8e8"/>
+                                                <constraint firstItem="PR9-WR-dNl" firstAttribute="top" secondItem="a25-Cy-b7s" secondAttribute="bottom" constant="10" id="rdr-Zj-yVe"/>
                                                 <constraint firstItem="0pC-RD-tU1" firstAttribute="leading" secondItem="hMQ-kE-30F" secondAttribute="leadingMargin" id="tuO-at-aWq"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageview" destination="0pC-RD-tU1" id="0iu-Pt-b2a"/>
+                                            <outlet property="label_lastmessage" destination="PR9-WR-dNl" id="2hk-jh-Y3b"/>
+                                            <outlet property="label_timestamp" destination="egq-Mw-ZiN" id="Uga-Bf-vKw"/>
+                                            <outlet property="label_title" destination="a25-Cy-b7s" id="Nh6-dj-xgn"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -494,14 +517,14 @@
                             <constraint firstItem="EBH-cD-UU9" firstAttribute="bottom" secondItem="d19-jq-7Vw" secondAttribute="bottom" id="xEa-zZ-Cv1"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Chat" image="ic_chat" id="ivB-YG-gu1"/>
+                    <navigationItem key="navigationItem" id="9gu-OA-2WL"/>
                     <connections>
                         <outlet property="tableview" destination="EBH-cD-UU9" id="DOv-m6-XNV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xf5-Kr-eYc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1716" y="870"/>
+            <point key="canvasLocation" x="2623.1884057971015" y="869.83695652173924"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Wsr-Da-HZq">
@@ -515,7 +538,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="9JF-UT-Q8t" kind="relationship" relationship="viewControllers" id="iof-qr-6WX"/>
-                        <segue destination="VP7-ky-PBY" kind="relationship" relationship="viewControllers" id="OI4-2T-I4m"/>
+                        <segue destination="lUl-mb-njY" kind="relationship" relationship="viewControllers" id="OI4-2T-I4m"/>
                         <segue destination="bc0-pn-5O2" kind="relationship" relationship="viewControllers" id="J67-D5-CWm"/>
                     </connections>
                 </tabBarController>
@@ -541,6 +564,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PUH-NF-UtL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2623.1884057971015" y="59.510869565217398"/>
+        </scene>
+        <!--Chat-->
+        <scene sceneID="PqD-Vt-0Eo">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lUl-mb-njY" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Chat" image="ic_chat" id="ivB-YG-gu1"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hya-xz-ZKT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="VP7-ky-PBY" kind="relationship" relationship="rootViewController" id="gzY-y5-5Mz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ykE-x9-aAg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1715.9420289855075" y="869.83695652173924"/>
         </scene>
     </scenes>
     <designables>
