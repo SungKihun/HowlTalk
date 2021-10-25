@@ -174,9 +174,13 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.comments.removeAll()
             
             for item in datasnapshot.children.allObjects as! [DataSnapshot] {
-                let comment = ChatModel.Comment(JSON: item.value as! [String: AnyObject])
-                self.comments.append(comment!)
+                
+                if let messagedic = item.value as? [String: AnyObject] {
+                    let comment = ChatModel.Comment(JSON: messagedic)
+                    self.comments.append(comment!)
+                }
             }
+            
             self.tableview.reloadData()
             
             if self.comments.count > 0 {
