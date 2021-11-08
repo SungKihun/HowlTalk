@@ -47,8 +47,23 @@ class LoginViewController: UIViewController {
                 let view = self.storyboard?.instantiateViewController(withIdentifier: "MainViewTabBarController") as! UITabBarController
                 
                 self.present(view, animated: true)
+                
+                let uid = Auth.currentUser?.uid
+                
+                Messaging.messaging().token { token, error in
+                  if let error = error {
+                    print("Error fetching FCM registration token: \(error)")
+                  } else if let token = token {
+                    print("FCM registration token: \(token)")
+                      Database.database().reference().child("users").child(uid!).updateChildValues(["pushToken": token])
+                  }
+                }
             }
         }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     @objc func loginEvent() {

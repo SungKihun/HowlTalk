@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>145597488581-7ervk2fvkrtkhpfgsco2kp255crephjr.apps.googleusercontent.com</string>
+	<string>145597488581-0ifk87l7klqe10j5sdeht9qvv38bliav.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.145597488581-7ervk2fvkrtkhpfgsco2kp255crephjr</string>
+	<string>com.googleusercontent.apps.145597488581-0ifk87l7klqe10j5sdeht9qvv38bliav</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAp2sMjXiXOzm4_IV6eSMQO4AYbe4Qy_mE</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.SungKihun.HowlTalk</string>
+	<string>com.KihunSung.HowlTalk</string>
 	<key>PROJECT_ID</key>
 	<string>howltalk-21787</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:145597488581:ios:ac49072693f82d2c57bfac</string>
+	<string>1:145597488581:ios:f0017ce42347b5a757bfac</string>
+	<key>DATABASE_URL</key>
+	<string>https://howltalk-21787-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>
