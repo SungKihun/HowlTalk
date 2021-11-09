@@ -66,9 +66,13 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
     @objc func signupEvent() {
         print(#function)
         Auth.auth().createUser(withEmail: email.text!, password: password.text!) { AuthDataResult, error in
-            let uid = AuthDataResult?.user.uid
+            let user = AuthDataResult?.user
+            let uid = user?.uid
             
             let image = self.imageView.image!.jpegData(compressionQuality: 0.1)
+            
+            user?.createProfileChangeRequest().displayName = self.name.text!
+            user?.createProfileChangeRequest().commitChanges(completion: nil)
             
             let storageRef = Storage.storage().reference().child("userImages").child(uid!)
             let databaseRef = Database.database().reference().child("users").child(uid!)
