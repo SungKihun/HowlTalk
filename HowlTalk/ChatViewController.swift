@@ -97,6 +97,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.label_timestamp.text = time.toDayTime
             }
             
+            setReadCount(label: cell.label_read_counter, position: indexPath.row)
+
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DestinationMessageCell", for: indexPath) as! DestinationMessageCell
@@ -114,6 +116,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             if let time = self.comments[indexPath.row].timestamp {
                 cell.label_timestamp.text = time.toDayTime
             }
+            
+            setReadCount(label: cell.label_read_counter, position: indexPath.row)
 
             return cell
         }
@@ -205,6 +209,22 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    func setReadCount(label: UILabel?, position: Int?) {
+        let readCount = self.comments[position!].readUsers.count
+        Database.database().reference().child("chatrooms").child(chatRoomUid!).child("users").observeSingleEvent(of: .value, with: { datasnapshot in
+            let dic = datasnapshot.value as! [String: Any]
+            
+            let noReadCount = dic.count - readCount
+            
+            if noReadCount > 0 {
+                label?.isHidden = false
+                label?.text = String(noReadCount)
+            } else {
+                label?.isHidden = true
+            }
+        })
+    }
+    
     func getMessageList() {
         databaseRef = Database.database().reference().child("chatrooms").child(self.chatRoomUid!).child("comments")
         observe = databaseRef?.observe(DataEventType.value) { datasnapshot in
@@ -268,6 +288,8 @@ extension Int {
 class MyMessageCell: UITableViewCell {
     
     @IBOutlet var label_message: UILabel!
+    
+    @IBOutlet var label_read_counter: UILabel!
     @IBOutlet var label_timestamp: UILabel!
 }
 
@@ -275,6 +297,8 @@ class DestinationMessageCell: UITableViewCell {
     
     @IBOutlet var label_message: UILabel!
     @IBOutlet var imageview_profile: UIImageView!
+    
+    @IBOutlet var label_read_counter: UILabel!
     @IBOutlet var label_name: UILabel!
     @IBOutlet var label_timestamp: UILabel!
 }
