@@ -23,6 +23,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     var comments: [ChatModel.Comment] = []
     var destinationUserModel: UserModel?
     
+    var databaseRef: DatabaseReference?
+    var observe: UInt?
+    
     public var destinationUid: String? // 나중에 내가 채팅할 대상의 uid
     
     override func viewDidLoad() {
@@ -50,6 +53,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         NotificationCenter.default.removeObserver(self)
         
         self.tabBarController?.tabBar.isHidden = false
+        
+        databaseRef?.removeObserver(withHandle: observe!)
     }
     
     @objc func keyboardWillShow(notification: Notification) {
@@ -201,7 +206,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func getMessageList() {
-        Database.database().reference().child("chatrooms").child(self.chatRoomUid!).child("comments").observe(DataEventType.value) { datasnapshot in
+        databaseRef = Database.database().reference().child("chatrooms").child(self.chatRoomUid!).child("comments")
+        observe = databaseRef?.observe(DataEventType.value) { datasnapshot in
             self.comments.removeAll()
             
             var readUserDic: Dictionary<String, AnyObject> = [:]
