@@ -7,8 +7,8 @@
 
 import UIKit
 import Firebase
-import ObjectMapper
 import Alamofire
+import Kingfisher
 
 class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -102,13 +102,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             let url = URL(string: (self.destinationUserModel?.profileImageUrl)!)
             
-            URLSession.shared.dataTask(with: url!) { data, response, err in
-                DispatchQueue.main.async {
-                    cell.imageview_profile.image = UIImage(data: data!)
-                    cell.imageview_profile.layer.cornerRadius = cell.imageview_profile.frame.width/2
-                    cell.imageview_profile.clipsToBounds = true
-                }
-            }.resume()
+            cell.imageview_profile.layer.cornerRadius = cell.imageview_profile.frame.width/2
+            cell.imageview_profile.clipsToBounds = true
+            cell.imageview_profile.kf.setImage(with: url)
             
             if let time = self.comments[indexPath.row].timestamp {
                 cell.label_timestamp.text = time.toDayTime
