@@ -25,6 +25,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var databaseRef: DatabaseReference?
     var observe: UInt?
+    var peopleCount: Int?
     
     public var destinationUid: String? // 나중에 내가 채팅할 대상의 uid
     
@@ -211,10 +212,23 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func setReadCount(label: UILabel?, position: Int?) {
         let readCount = self.comments[position!].readUsers.count
-        Database.database().reference().child("chatrooms").child(chatRoomUid!).child("users").observeSingleEvent(of: .value, with: { datasnapshot in
-            let dic = datasnapshot.value as! [String: Any]
-            
-            let noReadCount = dic.count - readCount
+        
+        if self.peopleCount == nil {
+            Database.database().reference().child("chatrooms").child(chatRoomUid!).child("users").observeSingleEvent(of: .value, with: { datasnapshot in
+                let dic = datasnapshot.value as! [String: Any]
+                self.peopleCount = dic.count
+                
+                let noReadCount = self.peopleCount! - readCount
+                
+                if noReadCount > 0 {
+                    label?.isHidden = false
+                    label?.text = String(noReadCount)
+                } else {
+                    label?.isHidden = true
+                }
+            })
+        } else {
+            let noReadCount = self.peopleCount! - readCount
             
             if noReadCount > 0 {
                 label?.isHidden = false
@@ -222,7 +236,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             } else {
                 label?.isHidden = true
             }
-        })
+        }
     }
     
     func getMessageList() {
@@ -235,24 +249,34 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             for item in datasnapshot.children.allObjects as! [DataSnapshot] {
                 let key = item.key as String
                 
-                
                 if let messagedic = item.value as? [String: AnyObject] {
                     let comment = ChatModel.Comment(JSON: messagedic)
-                    comment?.readUsers[self.uid!] = true
-                    readUserDic[key] = comment?.toJSON() as! NSDictionary
+                    let comment_modify = ChatModel.Comment(JSON: messagedic)
+                    comment_modify?.readUsers[self.uid!] = true
+                    readUserDic[key] = comment_modify?.toJSON() as! NSDictionary
+                    
                     self.comments.append(comment!)
                 }
             }
             
             let nsDic = readUserDic as NSDictionary
             
-            datasnapshot.ref.updateChildValues(nsDic as! [AnyHashable : Any]) { err, ref in
+            if !(self.comments.last?.readUsers.keys.contains(self.uid!))! {
+                datasnapshot.ref.updateChildValues(nsDic as! [AnyHashable : Any]) { err, ref in
+                    self.tableview.reloadData()
+                    
+                    if self.comments.count > 0 {
+                        self.tableview.scrollToRow(at: IndexPath(item: self.comments.count - 1, section: 0), at: UITableView.ScrollPosition.bottom, animated: true)
+                    }
+                }
+            } else {
                 self.tableview.reloadData()
                 
                 if self.comments.count > 0 {
                     self.tableview.scrollToRow(at: IndexPath(item: self.comments.count - 1, section: 0), at: UITableView.ScrollPosition.bottom, animated: true)
                 }
             }
+            
             self.tableview.reloadData()
             
             if self.comments.count > 0 {

@@ -29,7 +29,12 @@ class LoginViewController: UIViewController {
         self.view.addSubview(statusBar)
         statusBar.snp.makeConstraints { make in
             make.right.top.left.equalTo(self.view)
-            make.height.equalTo(20)
+            
+            if UIScreen.main.nativeBounds.height == 2436 {
+                make.height.equalTo(40)
+            } else {
+                make.height.equalTo(20)
+            }
         }
         
         color = remoteConfig["splash_background"].stringValue
