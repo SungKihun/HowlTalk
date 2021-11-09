@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import Firebase
 import Kingfisher
+import SwiftUI
 
 class PeopleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -52,6 +53,19 @@ class PeopleViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.tableView.reloadData()
             }
         }
+        
+        var selectFriendButton = UIButton()
+        view.addSubview(selectFriendButton)
+        selectFriendButton.snp.makeConstraints { make in
+            make.bottom.equalTo(view).offset(-70)
+            make.right.equalTo(view).offset(-20)
+        }
+        selectFriendButton.backgroundColor = UIColor.black
+        selectFriendButton.addTarget(self, action: #selector(showSelectFriendController), for: .touchUpInside)
+    }
+    
+    @objc func showSelectFriendController() {
+        self.performSegue(withIdentifier: "SelectFriendSegue", sender: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
