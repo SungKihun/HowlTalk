@@ -204,14 +204,29 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         Database.database().reference().child("chatrooms").child(self.chatRoomUid!).child("comments").observe(DataEventType.value) { datasnapshot in
             self.comments.removeAll()
             
+            var readUserDic: Dictionary<String, AnyObject> = [:]
+            
             for item in datasnapshot.children.allObjects as! [DataSnapshot] {
+                let key = item.key as String
+                
                 
                 if let messagedic = item.value as? [String: AnyObject] {
                     let comment = ChatModel.Comment(JSON: messagedic)
+                    comment?.readUsers[self.uid!] = true
+                    readUserDic[key] = comment?.toJSON() as! NSDictionary
                     self.comments.append(comment!)
                 }
             }
             
+            let nsDic = readUserDic as NSDictionary
+            
+            datasnapshot.ref.updateChildValues(nsDic as! [AnyHashable : Any]) { err, ref in
+                self.tableview.reloadData()
+                
+                if self.comments.count > 0 {
+                    self.tableview.scrollToRow(at: IndexPath(item: self.comments.count - 1, section: 0), at: UITableView.ScrollPosition.bottom, animated: true)
+                }
+            }
             self.tableview.reloadData()
             
             if self.comments.count > 0 {
