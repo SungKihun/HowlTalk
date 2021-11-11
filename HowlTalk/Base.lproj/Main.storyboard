@@ -591,7 +591,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LHG-tJ-VIU">
-                                <rect key="frame" x="0.0" y="44" width="414" height="643"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="578"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectFriendCell" rowHeight="70" id="N3c-pb-mCb" customClass="SelectFriendCell" customModule="HowlTalk" customModuleProvider="target">
@@ -646,18 +646,27 @@
                                     <outlet property="delegate" destination="3hS-X9-B7E" id="IHS-gm-pLz"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TrX-ux-E4s">
+                                <rect key="frame" x="156.66666666666666" y="639" width="100.66666666666666" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="채팅방 만들기"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8t3-Y7-R8y"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="LHG-tJ-VIU" firstAttribute="bottom" secondItem="8t3-Y7-R8y" secondAttribute="bottom" id="Ge7-6T-Crt"/>
+                            <constraint firstItem="TrX-ux-E4s" firstAttribute="centerX" secondItem="7S2-ot-AkJ" secondAttribute="centerX" id="8Cq-uf-tWP"/>
+                            <constraint firstItem="LHG-tJ-VIU" firstAttribute="bottom" secondItem="8t3-Y7-R8y" secondAttribute="bottom" constant="-65" id="Ge7-6T-Crt"/>
                             <constraint firstItem="LHG-tJ-VIU" firstAttribute="trailing" secondItem="8t3-Y7-R8y" secondAttribute="trailing" id="KoC-o3-xbe"/>
+                            <constraint firstItem="TrX-ux-E4s" firstAttribute="top" secondItem="LHG-tJ-VIU" secondAttribute="bottom" constant="17" id="Vxy-le-G7L"/>
                             <constraint firstItem="LHG-tJ-VIU" firstAttribute="leading" secondItem="8t3-Y7-R8y" secondAttribute="leading" id="gUL-QB-kaI"/>
+                            <constraint firstItem="8t3-Y7-R8y" firstAttribute="bottom" secondItem="TrX-ux-E4s" secondAttribute="bottom" constant="17" id="gax-al-Bob"/>
                             <constraint firstItem="LHG-tJ-VIU" firstAttribute="top" secondItem="8t3-Y7-R8y" secondAttribute="top" id="kfV-JN-xVZ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="X5y-7d-T9a"/>
                     <connections>
+                        <outlet property="button" destination="TrX-ux-E4s" id="gEP-Tv-0bh"/>
                         <outlet property="tableview" destination="LHG-tJ-VIU" id="slh-6z-2HS"/>
                     </connections>
                 </viewController>
@@ -719,6 +728,9 @@
         </designable>
         <designable name="pMH-hx-u1F">
             <size key="intrinsicContentSize" width="48.666666666666664" height="23.666666666666668"/>
+        </designable>
+        <designable name="qyO-gE-Srn">
+            <size key="intrinsicContentSize" width="30" height="30"/>
         </designable>
     </designables>
     <resources>

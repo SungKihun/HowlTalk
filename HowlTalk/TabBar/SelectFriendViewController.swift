@@ -9,11 +9,14 @@ import UIKit
 import Firebase
 import BEMCheckBox
 
-class SelectFriendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class SelectFriendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, BEMCheckBoxDelegate {
 
     @IBOutlet var tableview: UITableView!
+    @IBOutlet var button: UIButton!
     
     var array: [UserModel] = []
+    
+    var users = [String: Bool]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +44,8 @@ class SelectFriendViewController: UIViewController, UITableViewDataSource, UITab
                 self.tableview.reloadData()
             }
         }
+        
+        button.addTarget(self, action: #selector(createRoom), for: .touchUpInside)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,13 +53,35 @@ class SelectFriendViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "SelectFriendCell", for: indexPath) as! SelectFriendCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SelectFriendCell", for: indexPath) as! SelectFriendCell
         cell.lableName.text = array[indexPath.row].userName
         cell.imageviewProfile.kf.setImage(with: URL(string: array[indexPath.row].profileImageUrl!))
+        cell.checkbox.delegate = self
+        cell.checkbox.tag = indexPath.row
         
         return cell
     }
+    
+    func didTap(_ checkBox: BEMCheckBox) {
+        // 체크박스가 체크 됐을때 발생하는 이벤트
+        if checkBox.on {
+            users[self.array[checkBox.tag].uid!] = true
+            
+        }
+        // 체크박스가 체크가 해제 됐을때 발생하는 이벤트
+        else {
+            users.removeValue(forKey: self.array[checkBox.tag].uid!)
+        }
+    }
 
+    @objc func createRoom() {
+        let myUid = Auth.auth().currentUser?.uid
+        users[myUid!] = true
+        
+        let nsDic = users as NSDictionary
+        
+        Database.database().reference().child("chatrooms").childByAutoId().child("users").setValue(nsDic)
+    }
     /*
     // MARK: - Navigation
 
