@@ -191,7 +191,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                     
                     let chatModel = ChatModel(JSON: chatRoomDic)
                     
-                    if chatModel?.users[self.destinationUid!] == true {
+                    if (chatModel?.users[self.destinationUid!] == true) && (chatModel?.users.count == 2) {
                         self.chatRoomUid = item.key
                         self.sendButton.isEnabled = true
                         
