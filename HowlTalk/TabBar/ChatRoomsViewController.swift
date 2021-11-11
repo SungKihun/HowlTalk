@@ -73,6 +73,10 @@ class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.imageview.layer.masksToBounds = true
             cell.imageview.kf.setImage(with: url)
             
+            if self.chatrooms[indexPath.row].comments.keys.count == 0 {
+                return
+            }
+            
             let lastMessagekey = self.chatrooms[indexPath.row].comments.keys.sorted { $0 > $1 }
             cell.label_lastmessage.text = self.chatrooms[indexPath.row].comments[lastMessagekey[0]]?.message
             
@@ -85,7 +89,22 @@ class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableview.deselectRow(at: indexPath, animated: true)
-        print(#function)
+        
+        if self.destinationUsers[indexPath.row].count > 2 {
+            let destinationUid = self.destinationUsers[indexPath.row]
+            
+            let view = self.storyboard?.instantiateViewController(withIdentifier: "GroupChatRoomViewController") as! GroupChatRoomViewController
+            
+            self.navigationController?.pushViewController(view, animated: true)
+        } else {
+            let destinationUid = self.destinationUsers[indexPath.row]
+            
+            let view = self.storyboard?.instantiateViewController(withIdentifier: "GroupChatRoomViewController") as! GroupChatRoomViewController
+            
+            self.navigationController?.pushViewController(view, animated: true)
+
+        }
+        
         let destinationUid = self.destinationUsers[indexPath.row]
         
         let view = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController

@@ -261,6 +261,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             let nsDic = readUserDic as NSDictionary
             
+            if self.comments.last?.readUsers.keys == nil {
+                return
+            }
+            
             if !(self.comments.last?.readUsers.keys.contains(self.uid!))! {
                 datasnapshot.ref.updateChildValues(nsDic as! [AnyHashable : Any]) { err, ref in
                     self.tableview.reloadData()
