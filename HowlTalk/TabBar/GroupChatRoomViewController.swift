@@ -10,16 +10,33 @@ import Firebase
 
 class GroupChatRoomViewController: UIViewController {
 
+    @IBOutlet var textfield_message: UITextField!
+    @IBOutlet var button_send: UIButton!
+    
+    var destinationRoom: String?
+    var uid: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        uid = Auth.auth().currentUser?.uid
         Database.database().reference().child("users").observeSingleEvent(of: .value) { datasnapshot in
             let dic = datasnapshot.value as! [String: AnyObject]
-            
-            print(dic.count)
         }
+        
+        button_send.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
     }
     
+    @objc func sendMessage() {
+        let value: Dictionary<String, Any> = [
+            "uid": uid!,
+            "message": textfield_message.text!,
+            "timestamp": ServerValue.timestamp()
+        ]
+        Database.database().reference().child("chatrooms").child(destinationRoom!).child("comments").childByAutoId().setValue(value) { err, ref in
+            self.textfield_message.text = ""
+        }
+    }
 
     /*
     // MARK: - Navigation

@@ -15,6 +15,7 @@ class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableVie
 
     var uid: String!
     var chatrooms: [ChatModel]! = []
+    var keys: [String] = []
     var destinationUsers: [String] = []
 
     override func viewDidLoad() {
@@ -36,6 +37,7 @@ class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableVie
                 
                 if let chatroomdic = item.value as? [String: AnyObject] {
                     let chatModel = ChatModel(JSON: chatroomdic)
+                    self.keys.append(item.key)
                     self.chatrooms.append(chatModel!)
                 }
             }
@@ -94,6 +96,7 @@ class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableVie
             let destinationUid = self.destinationUsers[indexPath.row]
             
             let view = self.storyboard?.instantiateViewController(withIdentifier: "GroupChatRoomViewController") as! GroupChatRoomViewController
+            view.destinationRoom = self.keys[indexPath.row]
             
             self.navigationController?.pushViewController(view, animated: true)
         } else {

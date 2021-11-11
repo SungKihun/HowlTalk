@@ -329,9 +329,38 @@
                     <view key="view" contentMode="scaleToFill" id="4tS-Sk-0QB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FYt-oO-Abw">
+                                <rect key="frame" x="0.0" y="694" width="299" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="299" id="CdR-rV-RkN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YVV-EQ-kBz">
+                                <rect key="frame" x="307" y="698" width="107" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="d4s-9h-KNP"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="전송"/>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="5as-2b-WPJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="FYt-oO-Abw" firstAttribute="leading" secondItem="5as-2b-WPJ" secondAttribute="leading" id="9ht-mA-aHs"/>
+                            <constraint firstItem="5as-2b-WPJ" firstAttribute="bottom" secondItem="FYt-oO-Abw" secondAttribute="bottom" constant="8" id="P96-Af-dim"/>
+                            <constraint firstItem="5as-2b-WPJ" firstAttribute="trailing" secondItem="YVV-EQ-kBz" secondAttribute="trailing" id="dPq-ca-hvL"/>
+                            <constraint firstItem="5as-2b-WPJ" firstAttribute="bottom" secondItem="YVV-EQ-kBz" secondAttribute="bottom" constant="8" id="iku-ky-7aP"/>
+                            <constraint firstItem="YVV-EQ-kBz" firstAttribute="leading" secondItem="FYt-oO-Abw" secondAttribute="trailing" constant="8" id="uct-nF-cof"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="button_send" destination="YVV-EQ-kBz" id="hrg-sO-mAA"/>
+                        <outlet property="textfield_message" destination="FYt-oO-Abw" id="fxD-6w-VDR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AzI-Yg-GPq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
