@@ -58,9 +58,11 @@ class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableVie
         for item in chatrooms[indexPath.row].users {
             if item.key != self.uid {
                 destinationUid = item.key
+                print("destinationUid: \(destinationUid!)")
                 destinationUsers.append(destinationUid!)
             }
         }
+        print("destinationUsers: \(destinationUsers)")
         
         Database.database().reference().child("users").child(destinationUid!).observeSingleEvent(of: DataEventType.value, with: {
             datasnapshot in
@@ -91,30 +93,54 @@ class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableview.deselectRow(at: indexPath, animated: true)
-        
-        if self.destinationUsers[indexPath.row].count > 2 {
+        print(#function)
+        print("destinationUsers: \(destinationUsers)")
+        print("self.destinationUsers[indexPath.row]: \(self.destinationUsers[indexPath.row])")
+//        if (self.destinationUsers[indexPath.row].count > 2) {
+//            print("그룹 채팅방 선택")
+//            let destinationUid = self.destinationUsers[indexPath.row]
+//
+//            let view = self.storyboard?.instantiateViewController(withIdentifier: "GroupChatRoomViewController") as! GroupChatRoomViewController
+//            view.destinationRoom = self.keys[indexPath.row]
+//
+//            self.navigationController?.pushViewController(view, animated: true)
+//        } else {
+            print("단일 채팅방 선택")
             let destinationUid = self.destinationUsers[indexPath.row]
             
-            let view = self.storyboard?.instantiateViewController(withIdentifier: "GroupChatRoomViewController") as! GroupChatRoomViewController
-            view.destinationRoom = self.keys[indexPath.row]
+            let view = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+            view.destinationUid = destinationUid
             
             self.navigationController?.pushViewController(view, animated: true)
-        } else {
-            let destinationUid = self.destinationUsers[indexPath.row]
-            
-            let view = self.storyboard?.instantiateViewController(withIdentifier: "GroupChatRoomViewController") as! GroupChatRoomViewController
-            
-            self.navigationController?.pushViewController(view, animated: true)
-
-        }
-        
-        let destinationUid = self.destinationUsers[indexPath.row]
-        
-        let view = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
-        view.destinationUid = destinationUid
-        
-        self.navigationController?.pushViewController(view, animated: true)
+//        }
     }
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableview.deselectRow(at: indexPath, animated: true)
+//
+//        if self.destinationUsers[indexPath.row].count > 2 {
+//            let destinationUid = self.destinationUsers[indexPath.row]
+//
+//            let view = self.storyboard?.instantiateViewController(withIdentifier: "GroupChatRoomViewController") as! GroupChatRoomViewController
+//            view.destinationRoom = self.keys[indexPath.row]
+//
+//            self.navigationController?.pushViewController(view, animated: true)
+//        } else {
+//            let destinationUid = self.destinationUsers[indexPath.row]
+//
+//            let view = self.storyboard?.instantiateViewController(withIdentifier: "GroupChatRoomViewController") as! GroupChatRoomViewController
+//
+//            self.navigationController?.pushViewController(view, animated: true)
+//
+//        }
+//
+//        let destinationUid = self.destinationUsers[indexPath.row]
+//
+//        let view = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+//        view.destinationUid = destinationUid
+//
+//        self.navigationController?.pushViewController(view, animated: true)
+//    }
     
     /*
      // MARK: - Navigation

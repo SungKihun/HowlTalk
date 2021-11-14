@@ -136,15 +136,32 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             ]
         ]
         
+        // 생성된 채팅방이 없으면
         if chatRoomUid == nil {
+            print("채팅 방 생성")
             self.sendButton.isEnabled = false
-            // 방 생성 코드
+            // 채팅 방 생성
             Database.database().reference().child("chatrooms").childByAutoId().setValue(createRoomInfo) { error, DatabaseReference in
                 if error == nil {
                     self.checkChatRoom()
+                    
+                    print("메세지 전송")
+                    let value = [
+                        "uid": self.uid!,
+                        "message": self.textfield_message.text!,
+                        "timestamp": ServerValue.timestamp()
+                    ] as [String : Any]
+                    
+                    Database.database().reference().child("chatrooms").child(self.chatRoomUid!).child("comments").childByAutoId().setValue(value) { error, databaseReference in
+                        self.sendGcm()
+                        self.textfield_message.text = ""
+                    }
+
                 }
             }
+            
         } else {
+            print("메세지 전송")
             let value = [
                 "uid": uid!,
                 "message": textfield_message.text!,
@@ -182,26 +199,30 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
+    // 채팅방 체크
     func checkChatRoom() {
+        print("1")
         Database.database().reference().child("chatrooms").queryOrdered(byChild: "users/" + uid!).queryEqual(toValue: true).observeSingleEvent(of: DataEventType.value) { DataSnapshot in
-            
+            print("2")
             for item in DataSnapshot.children.allObjects as! [DataSnapshot] {
-                
+                print("3")
                 if let chatRoomDic = item.value as? [String: AnyObject] {
-                    
+                    print("4")
                     let chatModel = ChatModel(JSON: chatRoomDic)
-                    
+                    print("여기 통과")
                     if (chatModel?.users[self.destinationUid!] == true) && (chatModel?.users.count == 2) {
                         self.chatRoomUid = item.key
                         self.sendButton.isEnabled = true
                         
                         self.getDestinationInfo()
+                        print("정보 가져옴")
                     }
                 }
             }
         }
     }
     
+    // 대화 상대 정보 가져오기
     func getDestinationInfo() {
         Database.database().reference().child("users").child(self.destinationUid!).observeSingleEvent(of: DataEventType.value) { datasnapshot in
             self.destinationUserModel = UserModel()
@@ -239,6 +260,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    // 메세지 목록 가져오기
     func getMessageList() {
         databaseRef = Database.database().reference().child("chatrooms").child(self.chatRoomUid!).child("comments")
         observe = databaseRef?.observe(DataEventType.value) { datasnapshot in

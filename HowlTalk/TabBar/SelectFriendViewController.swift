@@ -75,7 +75,6 @@ class SelectFriendViewController: UIViewController, UITableViewDataSource, UITab
     }
 
     @objc func createRoom() {
-        print(#function)
         let myUid = Auth.auth().currentUser?.uid
         users[myUid!] = true
         

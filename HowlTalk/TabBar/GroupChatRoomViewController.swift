@@ -91,6 +91,7 @@ class GroupChatRoomViewController: UIViewController, UITableViewDataSource, UITa
     }
 
     func getMessageList() {
+        print("버그 위치")
         databaseRef = Database.database().reference().child("chatrooms").child(self.destinationRoom!).child("comments")
         observe = databaseRef?.observe(DataEventType.value) { datasnapshot in
             self.comments.removeAll()
@@ -107,16 +108,18 @@ class GroupChatRoomViewController: UIViewController, UITableViewDataSource, UITa
                     readUserDic[key] = comment_modify?.toJSON() as! NSDictionary
                     
                     self.comments.append(comment!)
+                    print("버그 위치1")
                 }
             }
-            
+            print("버그 위치2")
             let nsDic = readUserDic as NSDictionary
             
             if self.comments.last?.readUsers.keys == nil {
                 return
             }
-            
+            print("버그 위치5")
             if !(self.comments.last?.readUsers.keys.contains(self.uid!))! {
+                print("버그 위치7")
                 datasnapshot.ref.updateChildValues(nsDic as! [AnyHashable : Any]) { err, ref in
                     self.tableview.reloadData()
                     
@@ -125,20 +128,24 @@ class GroupChatRoomViewController: UIViewController, UITableViewDataSource, UITa
                     }
                 }
             } else {
+                // 여기다
+                print("버그 위치8")
                 self.tableview.reloadData()
                 
                 if self.comments.count > 0 {
                     self.tableview.scrollToRow(at: IndexPath(item: self.comments.count - 1, section: 0), at: UITableView.ScrollPosition.bottom, animated: true)
                 }
             }
-            
+            print("버그 위치6")
             self.tableview.reloadData()
             
             if self.comments.count > 0 {
                 self.tableview.scrollToRow(at: IndexPath(item: self.comments.count
                                                          - 1, section: 0), at: UITableView.ScrollPosition.bottom, animated: true)
             }
+            print("버그 위치4")
         }
+        print("버그 위치3")
     }
     
     /*
