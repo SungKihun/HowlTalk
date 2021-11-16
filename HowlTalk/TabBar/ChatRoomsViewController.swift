@@ -28,13 +28,14 @@ class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidAppear(_ animated: Bool) {
         print(#function)
-        viewDidLoad()
+        self.getChatroomsList()
     }
     
     func getChatroomsList() {
+        // 기존에 있던 채팅방 지우고
+        self.chatrooms.removeAll()
         Database.database().reference().child("chatrooms").queryOrdered(byChild: "users/" + uid).queryEqual(toValue: true).observeSingleEvent(of: DataEventType.value) { datasnapshot in
             for item in datasnapshot.children.allObjects as! [DataSnapshot] {
-                
                 if let chatroomdic = item.value as? [String: AnyObject] {
                     let chatModel = ChatModel(JSON: chatroomdic)
                     self.keys.append(item.key)
@@ -58,19 +59,17 @@ class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableVie
         for item in chatrooms[indexPath.row].users {
             if item.key != self.uid {
                 destinationUid = item.key
-                print("destinationUid: \(destinationUid!)")
                 destinationUsers.append(destinationUid!)
             }
         }
-        print("destinationUsers: \(destinationUsers)")
         
         Database.database().reference().child("users").child(destinationUid!).observeSingleEvent(of: DataEventType.value, with: {
             datasnapshot in
+            
             let userModel = UserModel()
             userModel.setValuesForKeys(datasnapshot.value as! [String: AnyObject])
             
             cell.label_title.text = userModel.userName
-            
             let url = URL(string: userModel.profileImageUrl!)
             
             cell.imageview.layer.cornerRadius = cell.imageview.frame.width / 2

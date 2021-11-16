@@ -128,6 +128,7 @@ class PeopleViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return 70
     }
     
+    // 유저를 선택하면 1:1 채팅으로 이동
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let view = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController else { return }
         view.destinationUid = self.array[indexPath.row].uid
