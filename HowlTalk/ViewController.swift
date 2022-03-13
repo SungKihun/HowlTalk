@@ -73,7 +73,8 @@ class ViewController: UIViewController {
 extension UIColor {
     convenience init(hex: String) {
         let scanner = Scanner(string: hex)
-        scanner.scanLocation = 1
+//        scanner.scanLocation = 1
+        scanner.currentIndex = scanner.string.index(after: scanner.currentIndex)
         
         var rgbValue: UInt64 = 0
         

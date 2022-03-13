@@ -97,7 +97,8 @@ class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableVie
         print("self.destinationUsers[indexPath.row]: \(self.destinationUsers[indexPath.row])")
         if (self.destinationUsers[indexPath.row].count > 2) {
             print("그룹 채팅방 선택")
-            let destinationUid = self.destinationUsers[indexPath.row]
+            _ = self.destinationUsers[indexPath.row]
+//            let destinationUid = self.destinationUsers[indexPath.row]
 
             let view = self.storyboard?.instantiateViewController(withIdentifier: "GroupChatRoomViewController") as! GroupChatRoomViewController
             view.destinationRoom = self.keys[indexPath.row]

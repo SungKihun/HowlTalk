@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import Alamofire
+import ObjectMapper
 
 class GroupChatRoomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -31,7 +32,7 @@ class GroupChatRoomViewController: UIViewController, UITableViewDataSource, UITa
 
         uid = Auth.auth().currentUser?.uid
         Database.database().reference().child("users").observeSingleEvent(of: .value) { datasnapshot in
-            self.users = datasnapshot.value as! [String: AnyObject]
+            self.users = datasnapshot.value as? [String: AnyObject]
         }
         
         button_send.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
@@ -55,7 +56,8 @@ class GroupChatRoomViewController: UIViewController, UITableViewDataSource, UITa
                     }
                     
                     let user = self.users![item]
-                    self.sendGcm(pushToken: user!["pushToken"] as! String)
+//                    self.sendGcm(pushToken: user!["pushToken"] as? String)
+                    self.sendGcm(pushToken: user as? String)
                 }
                 self.textfield_message.text = ""
             }
@@ -83,7 +85,7 @@ class GroupChatRoomViewController: UIViewController, UITableViewDataSource, UITa
         AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: header).responseJSON { response in
             print(response.result)
         }
-        
+    
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -108,12 +110,14 @@ class GroupChatRoomViewController: UIViewController, UITableViewDataSource, UITa
             let destinationUser = users![self.comments[indexPath.row].uid!]
             let cell = tableView.dequeueReusableCell(withIdentifier: "DestinationMessageCell", for: indexPath) as! DestinationMessageCell
             
-            cell.label_name.text = destinationUser!["userName"] as! String
+//            cell.label_name.text = destinationUser!["userName"] as! String
+            cell.label_name.text = destinationUser!["userName"]?.stringValue
             cell.label_message.text = self.comments[indexPath.row].message
             cell.label_message.numberOfLines = 0
             
-            let imageUrl = destinationUser!["profileImageUrl"] as! String
-            let url = URL(string: (imageUrl))
+//            let imageUrl = destinationUser!["profileImageUrl"] as! String
+            let imageUrl = destinationUser!["profileImageUrl"]?.stringValue
+            let url = URL(string: (imageUrl!))
             
             cell.imageview_profile.layer.cornerRadius = cell.imageview_profile.frame.width/2
             cell.imageview_profile.clipsToBounds = true

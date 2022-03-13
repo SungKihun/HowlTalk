@@ -54,7 +54,7 @@ class PeopleViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         
-        var selectFriendButton = UIButton()
+        let selectFriendButton = UIButton()
         view.addSubview(selectFriendButton)
         selectFriendButton.snp.makeConstraints { make in
             make.bottom.equalTo(view).offset(-70)
