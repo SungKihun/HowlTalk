@@ -177,7 +177,7 @@ class GroupChatRoomViewController: UIViewController, UITableViewDataSource, UITa
                     let comment = ChatModel.Comment(JSON: messagedic)
                     let comment_modify = ChatModel.Comment(JSON: messagedic)
                     comment_modify?.readUsers[self.uid!] = true
-                    readUserDic[key] = comment_modify?.toJSON() as! NSDictionary
+                    readUserDic[key] = comment_modify?.toJSON() as NSDictionary?
                     
                     self.comments.append(comment!)
                     print("버그 위치1")
