@@ -23,7 +23,6 @@ class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         
         self.uid = Auth.auth().currentUser?.uid
-        self.getChatroomsList()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,6 +47,8 @@ class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(#function)
+        print("self.chatrooms.count \(self.chatrooms.count)")
         return self.chatrooms.count
     }
     
