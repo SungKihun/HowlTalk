@@ -74,7 +74,8 @@ class LoginViewController: UIViewController {
     @objc func loginEvent() {
         Auth.auth().signIn(withEmail: email.text!, password: password.text!) { AuthDataResult, Error in
             if Error != nil {
-                let alert = UIAlertController(title: "에러", message: Error.debugDescription, preferredStyle: .alert)
+                print(Error.debugDescription)
+                let alert = UIAlertController(title: "계정 확인", message: "아이디와 비밀번호를 다시 확인해주세요.", preferredStyle: .alert)
                 let ok = UIAlertAction(title: "확인", style: .default)
                 alert.addAction(ok)
                 
