@@ -54,22 +54,24 @@ class PeopleViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         
-        let selectFriendButton = UIButton()
-        view.addSubview(selectFriendButton)
-        selectFriendButton.snp.makeConstraints { make in
-            make.bottom.equalTo(view).offset(-70)
-            make.right.equalTo(view).offset(-20)
-            make.width.height.equalTo(50)
-        }
-        selectFriendButton.backgroundColor = UIColor.black
-        selectFriendButton.addTarget(self, action: #selector(showSelectFriendController), for: .touchUpInside)
-        selectFriendButton.layer.cornerRadius = 25
-        selectFriendButton.layer.masksToBounds = true
+        // 그룹 채팅방 대상 선택 제거
+//        let selectFriendButton = UIButton()
+//        view.addSubview(selectFriendButton)
+//        selectFriendButton.snp.makeConstraints { make in
+//            make.bottom.equalTo(view).offset(-70)
+//            make.right.equalTo(view).offset(-20)
+//            make.width.height.equalTo(50)
+//        }
+//        selectFriendButton.backgroundColor = UIColor.black
+//        selectFriendButton.addTarget(self, action: #selector(showSelectFriendController), for: .touchUpInside)
+//        selectFriendButton.layer.cornerRadius = 25
+//        selectFriendButton.layer.masksToBounds = true
     }
     
-    @objc func showSelectFriendController() {
-        self.performSegue(withIdentifier: "SelectFriendSegue", sender: nil)
-    }
+    // MARK: 그룹 채팅방 대상 선택화면 이동 세그웨이
+//    @objc func showSelectFriendController() {
+//        self.performSegue(withIdentifier: "SelectFriendSegue", sender: nil)
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return array.count

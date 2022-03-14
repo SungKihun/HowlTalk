@@ -10,6 +10,7 @@ import Firebase
 import Alamofire
 import ObjectMapper
 
+//MARK: 그룹 채팅방 보기 컨트롤러
 class GroupChatRoomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet var textfield_message: UITextField!

@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import BEMCheckBox
 
+//MARK: 그룹 채팅방 대상 선택 컨트롤러
 class SelectFriendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, BEMCheckBoxDelegate {
 
     @IBOutlet var tableview: UITableView!

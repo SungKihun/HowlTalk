@@ -145,17 +145,17 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.checkChatRoom()
                 }
             }
-        } else {
-            let value = [
-                "uid": uid!,
-                "message": textfield_message.text!,
-                "timestamp": ServerValue.timestamp()
-            ] as [String : Any]
-
-            Database.database().reference().child("chatrooms").child(chatRoomUid!).child("comments").childByAutoId().setValue(value) { error, databaseReference in
-                self.sendGcm()
-                self.textfield_message.text = ""
-            }
+        }
+        
+        let value = [
+            "uid": uid!,
+            "message": textfield_message.text!,
+            "timestamp": ServerValue.timestamp()
+        ] as [String : Any]
+        
+        Database.database().reference().child("chatrooms").child(chatRoomUid!).child("comments").childByAutoId().setValue(value) { error, databaseReference in
+            self.sendGcm()
+            self.textfield_message.text = ""
         }
     }
     
