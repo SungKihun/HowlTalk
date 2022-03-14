@@ -892,22 +892,19 @@
     </scenes>
     <designables>
         <designable name="GYe-pf-OSX">
-            <size key="intrinsicContentSize" width="76.666666666666671" height="22"/>
+            <size key="intrinsicContentSize" width="90.333333333333329" height="27"/>
         </designable>
         <designable name="Nra-nT-uvS">
-            <size key="intrinsicContentSize" width="76.666666666666671" height="22"/>
+            <size key="intrinsicContentSize" width="90.333333333333329" height="27"/>
         </designable>
         <designable name="UzG-V3-8BU">
-            <size key="intrinsicContentSize" width="48.666666666666664" height="23.666666666666668"/>
+            <size key="intrinsicContentSize" width="62.666666666666664" height="28.666666666666668"/>
         </designable>
         <designable name="Xm6-8u-7ll">
-            <size key="intrinsicContentSize" width="52" height="23.666666666666668"/>
+            <size key="intrinsicContentSize" width="66" height="28.666666666666668"/>
         </designable>
         <designable name="pMH-hx-u1F">
-            <size key="intrinsicContentSize" width="48.666666666666664" height="23.666666666666668"/>
-        </designable>
-        <designable name="qyO-gE-Srn">
-            <size key="intrinsicContentSize" width="30" height="30"/>
+            <size key="intrinsicContentSize" width="62.666666666666664" height="28.666666666666668"/>
         </designable>
     </designables>
     <resources>
