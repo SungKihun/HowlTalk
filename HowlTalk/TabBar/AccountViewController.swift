@@ -14,11 +14,10 @@ class AccountViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        conditionsCommentButton.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
+        
     }
     
-    @objc func showAlert() {
+    @IBAction func showAlert(_ sender: Any) {
         let alertController = UIAlertController(title: "상태 메세지", message: nil, preferredStyle: .alert)
         alertController.addTextField { textfield in
             textfield.placeholder = "상태메세지를 입력해주세요."

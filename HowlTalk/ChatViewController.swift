@@ -33,7 +33,6 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
 
         uid = Auth.auth().currentUser?.uid
-        sendButton.addTarget(self, action: #selector(createRoom), for: .touchUpInside)
         
         checkChatRoom()
         
@@ -128,7 +127,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         return UITableView.automaticDimension
     }
     
-    @objc func createRoom() {
+    @IBAction func createRoom(_ sender: Any) {
         let createRoomInfo = [
             "users": [
                 uid!: true,

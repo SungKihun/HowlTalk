@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -81,6 +81,9 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Login">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="loginEvent:" destination="DSw-aa-aEY" eventType="touchUpInside" id="0Qe-vY-TpN"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gm5-tS-RdW">
                                 <rect key="frame" x="20" y="484" width="374" height="40"/>
@@ -93,6 +96,9 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Sign Up">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="presentSignUp:" destination="DSw-aa-aEY" eventType="touchUpInside" id="OhS-VB-FjI"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="yhu-aq-syP"/>
@@ -159,6 +165,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="전송"/>
+                                <connections>
+                                    <action selector="createRoom:" destination="T2X-Mr-lEz" eventType="touchUpInside" id="Nlk-xv-p6G"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HRA-ml-J6q">
                                 <rect key="frame" x="20" y="696" width="299" height="34"/>
@@ -564,6 +573,9 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="회원가입"/>
+                                <connections>
+                                    <action selector="signupEvent:" destination="eSV-fH-RQt" eventType="touchUpInside" id="wUy-mC-vyw"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lyv-Su-Tl7">
                                 <rect key="frame" x="20" y="480" width="374" height="40"/>
@@ -574,6 +586,9 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="취소"/>
+                                <connections>
+                                    <action selector="cancelEvent:" destination="eSV-fH-RQt" eventType="touchUpInside" id="S4g-YV-6Ih"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_add_to_photos" translatesAutoresizingMaskIntoConstraints="NO" id="3XV-XM-6xT">
                                 <rect key="frame" x="157" y="180" width="100" height="100"/>
@@ -630,6 +645,9 @@
                                 <rect key="frame" x="150.66666666666666" y="50" width="112.99999999999997" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="상태메세지 입력"/>
+                                <connections>
+                                    <action selector="showAlert:" destination="bc0-pn-5O2" eventType="touchUpInside" id="g3X-a4-3Zx"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3eo-Q9-FzC"/>
@@ -892,19 +910,22 @@
     </scenes>
     <designables>
         <designable name="GYe-pf-OSX">
-            <size key="intrinsicContentSize" width="90.333333333333329" height="27"/>
+            <size key="intrinsicContentSize" width="76.666666666666671" height="22"/>
         </designable>
         <designable name="Nra-nT-uvS">
-            <size key="intrinsicContentSize" width="90.333333333333329" height="27"/>
+            <size key="intrinsicContentSize" width="76.666666666666671" height="22"/>
         </designable>
         <designable name="UzG-V3-8BU">
-            <size key="intrinsicContentSize" width="62.666666666666664" height="28.666666666666668"/>
+            <size key="intrinsicContentSize" width="48.666666666666664" height="23.666666666666668"/>
         </designable>
         <designable name="Xm6-8u-7ll">
-            <size key="intrinsicContentSize" width="66" height="28.666666666666668"/>
+            <size key="intrinsicContentSize" width="52" height="23.666666666666668"/>
         </designable>
         <designable name="pMH-hx-u1F">
-            <size key="intrinsicContentSize" width="62.666666666666664" height="28.666666666666668"/>
+            <size key="intrinsicContentSize" width="48.666666666666664" height="23.666666666666668"/>
+        </designable>
+        <designable name="qyO-gE-Srn">
+            <size key="intrinsicContentSize" width="30" height="30"/>
         </designable>
     </designables>
     <resources>

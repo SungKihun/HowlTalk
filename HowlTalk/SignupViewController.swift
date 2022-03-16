@@ -7,8 +7,9 @@
 
 import UIKit
 import Firebase
+import PhotosUI
 
-class SignupViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class SignupViewController: UIViewController, UINavigationControllerDelegate, PHPickerViewControllerDelegate {
 
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var email: UITextField!
@@ -40,51 +41,52 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
         
         signUp.backgroundColor = UIColor(hex: color)
         cancel.backgroundColor = UIColor(hex: color)
-        
-        signUp.addTarget(self, action: #selector(signupEvent), for: .touchUpInside)
-        cancel.addTarget(self, action: #selector(cancelEvent), for: .touchUpInside)
     }
     
     @objc func imagePicker() {
-        let imagePicker = UIImagePickerController()
+        let configuration = PHPickerConfiguration()
+        let phPicker = PHPickerViewController(configuration: configuration)
+        phPicker.delegate = self
         
-        imagePicker.delegate = self
-        imagePicker.allowsEditing = true
-        // photoLibrary: deprecated 경고. PHPicker 사용
-        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
-        
-        self.present(imagePicker, animated: true)
+        self.present(phPicker, animated: true)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        imageView.image = info[.originalImage] as? UIImage
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         
-        dismiss(animated: true)
+        picker.dismiss(animated: false) {
+            let itemProvider = results.first?.itemProvider
+            
+            if let itemProvider = itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
+                itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+                    DispatchQueue.main.async {
+                        self.imageView.image = image as? UIImage
+                    }
+                }
+            }
+        }
     }
     
-    
-    @objc func signupEvent() {
-        print(#function)
+    @IBAction func signupEvent(_ sender: Any) {
         Auth.auth().createUser(withEmail: email.text!, password: password.text!) { AuthDataResult, error in
             let user = AuthDataResult?.user
             let uid = user?.uid
-            
+
             let image = self.imageView.image!.jpegData(compressionQuality: 0.1)
-            
+
             user?.createProfileChangeRequest().displayName = self.name.text!
             user?.createProfileChangeRequest().commitChanges(completion: nil)
-            
+
             let storageRef = Storage.storage().reference().child("userImages").child(uid!)
             let databaseRef = Database.database().reference().child("users").child(uid!)
-            
+
             storageRef.putData(image!, metadata: nil) { (StorageMetadata, Error) in
                 storageRef.downloadURL { URL, Error in
                     guard let downloadURL = URL else { return }
                     let values = ["userName": self.name.text!, "profileImageUrl": downloadURL.absoluteString, "uid": Auth.auth().currentUser?.uid]
-                    
+
                     databaseRef.setValue(values) { error, DatabaseReference in
                         if error == nil {
-                            self.cancelEvent()
+                            self.cancel.sendActions(for: .touchUpInside)
                         }
                     }
                 }
@@ -92,7 +94,7 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
         }
     }
     
-    @objc func cancelEvent() {
+    @IBAction func cancelEvent(_ sender: Any) {
         self.dismiss(animated: true)
     }
     

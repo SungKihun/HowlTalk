@@ -96,6 +96,7 @@ class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableVie
         print(#function)
         print("destinationUsers: \(destinationUsers)")
         print("self.destinationUsers[indexPath.row]: \(self.destinationUsers[indexPath.row])")
+        // 그룹 채팅방 선택
 //        if (self.destinationUsers[indexPath.row].count > 2) {
 //            print("그룹 채팅방 선택")
 //            _ = self.destinationUsers[indexPath.row]
@@ -116,6 +117,7 @@ class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableVie
 //        }
     }
     
+    // 그룹 채팅방 변경 전 tableView
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        tableview.deselectRow(at: indexPath, animated: true)
 //

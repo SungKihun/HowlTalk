@@ -43,10 +43,6 @@ class LoginViewController: UIViewController {
         loginButton.backgroundColor = UIColor(hex: color)
         signUp.backgroundColor = UIColor(hex: color)
         
-        loginButton.addTarget(self, action: #selector(loginEvent), for: .touchUpInside)
-        
-        signUp.addTarget(self, action: #selector(presentSignUp), for: .touchUpInside)
-        
         Auth.auth().addStateDidChangeListener { Auth, User in
             if User != nil {
                 let view = self.storyboard?.instantiateViewController(withIdentifier: "MainViewTabBarController") as! UITabBarController
@@ -71,7 +67,7 @@ class LoginViewController: UIViewController {
         self.view.endEditing(true)
     }
     
-    @objc func loginEvent() {
+    @IBAction func loginEvent(_ sender: Any) {
         Auth.auth().signIn(withEmail: email.text!, password: password.text!) { AuthDataResult, Error in
             if Error != nil {
                 print(Error.debugDescription)
@@ -84,7 +80,7 @@ class LoginViewController: UIViewController {
         }
     }
 
-    @objc func presentSignUp() {
+    @IBAction func presentSignUp(_ sender: Any) {
         let view = self.storyboard?.instantiateViewController(withIdentifier: "SignupViewController") as! SignupViewController
         
         self.present(view, animated: true)
